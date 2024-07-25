@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class GradeCalculator {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int numSubjects;
+        do {
+            System.out.println("Enter the number of subjects (positive integer):");
+            numSubjects = sc.nextInt();
+        } while (numSubjects <= 0);
+
+        int totalMarks = 0;
+        int maxMarksPerSubject = 100;
+
+        for (int i = 1; i <= numSubjects; i++) {
+            System.out.printf("Enter marks assigned in subject %d (out of 100): ", i);
+            int marks;
+            do {
+                marks = sc.nextInt();
+                if (marks < 0 || marks > maxMarksPerSubject) {
+                    System.out.println("Marks assigned should be in range 0 to 100. Enter valid marks:");
+                }
+            } while (marks < 0 || marks > maxMarksPerSubject);
+            totalMarks += marks;
+        }
+
+        double averagePercentage = (double) totalMarks / (numSubjects * maxMarksPerSubject) * 100;
+
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Average Percentage: " + averagePercentage + "%");
+
+        String grade;
+        if (averagePercentage >= 90) {
+            grade = "A+";
+            System.out.println("Remarks: Excellent performance, keep it up!");
+        } else if (averagePercentage >= 80) {
+            grade = "A";
+            System.out.println("Remarks: Very good performance, try to improve it further.");
+        } else if (averagePercentage >= 70) {
+            grade = "A-";
+            System.out.println("Remarks: Good performance, keep trying to improve.");
+        } else if (averagePercentage >= 60) {
+            grade = "B+";
+            System.out.println("Remarks: Average performance, improvement is required.");
+        } else if (averagePercentage >= 50) {
+            grade = "B";
+            System.out.println("Remarks: Below average performance, improvement is required.");
+        } else if (averagePercentage >= 40) {
+            grade = "B-";
+            System.out.println("Remarks: Poor performance, meet with faculty.");
+        } else {
+            grade = "F";
+            System.out.println("Remarks: You failed. Please consider retaking the course.");
+        }
+
+        System.out.println("Grade: " + grade);
+    }
+}
